@@ -11,16 +11,16 @@
 	require_once("../classeForm/classeButton.php");
 
 	include("conexao.php");
-	if(isset($_POST["ID"])){
+	if(isset($_POST["id"])){
 
 		require_once("classeControllerBD.php");
 
 		$c = new ControllerBD($conexao);
-		$colunas=array("ID_CINEMA", "NOME_CINEMA","ID_CIDADE");
-		$tabelas[0][0]="CINEMA";
+		$colunas=array("*");
+		$tabelas[0][0]="cinema";
 		$tabelas[0][1]=null;
 		$ordenacao=null;
-		$condicao = $_POST["ID"];
+		$condicao = $_POST["id"];
 
 
 		$stmt = $c->selecionar($colunas, $tabelas, $ordenacao, $condicao);
@@ -32,10 +32,10 @@
 		$value_id_cidade = $linha["ID_CIDADE"];
 		
 		$disabled = true;
-		$action = "altera.php?tabela=CINEMA";
+		$action = "altera.php?tabela=cinema";
 	}else{
 
-		$action = "insere.php?tabela=CINEMA";
+		$action = "insere.php?tabela=cinema";
 		$value_id_cinema = null;
 		$value_nome_cinema = null;
 		$value_id_cidade= null;
@@ -58,7 +58,7 @@
 	$v = array("action"=>$action,"method"=>"post");
 	$f = new Form($v);
 	
-	$v = array("type"=>"text","name"=>"ID_CINEMA","placeholder"=>"ID CINEMA...","value"=>$value_id_cinema);
+	$v = array("type"=>"number","name"=>"ID_CINEMA","placeholder"=>"ID DO CINEMA...","value"=>$value_id_cinema);
 	$f->add_input($v);
 	if($disabled == true){
 		array("type"=>"hidden", "name"=>"ID_CINEMA", "placeholder"=>"ID DO CINEMA");
@@ -85,10 +85,11 @@
 		//defina a seguinte regra para o botao de envio
 		$("button").click(function(){
 			$.ajax({
-				url: "insere.php?tabela=CINEMA",
+				url: "insere.php?tabela=cinema",
 				type: "post",
 				data:
-					{ID_CINEMA: $("input[name='ID_CINEMA']").val(),
+					{
+					ID_CINEMA: $("input[name='ID_CINEMA']").val(),
 					NOME_CINEMA: $("input[name='NOME_CINEMA']").val(),
 					ID_CIDADE: $("select[name='ID_CIDADE'").val()
 					},

@@ -11,16 +11,16 @@
 	require_once("../classeForm/classeButton.php");
 
 	include("conexao.php");
-	if(isset($_POST["ID"])){
+	if(isset($_POST["id"])){
 
 		require_once("classeControllerBD.php");
 
 		$c = new ControllerBD($conexao);
-		$colunas=array("ID_CLASSIFICAO", "CLASSIFICACAO_INDICATIVA","ID_FILME" );
-		$tabelas[0][0]="CLASSIFICAO";
+		$colunas=array("*");
+		$tabelas[0][0]="classificacao";
 		$tabelas[0][1]=null;
 		$ordenacao=null;
-		$condicao = $_POST["ID"];
+		$condicao = $_POST["id"];
 
 
 		$stmt = $c->selecionar($colunas, $tabelas, $ordenacao, $condicao);
@@ -32,12 +32,12 @@
 		$value_id_filme = $linha["ID_FILME"];
 		
 		$disabled = true;
-		$action = "altera.php?tabela=CLASSIFICACAO";
+		$action = "altera.php?tabela=classificacao";
 	}else{
 
-		$action = "insere.php?tabela=CLASSIFICACAO";
+		$action = "insere.php?tabela=classificacao";
 		$value_id_classificacao = null;
-		$value_nome_classificacao_indicativa = null;
+		$value_classificacao_indicativa = null;
 		$value_id_filme = null;
 
 		$disabled = false;
@@ -58,7 +58,7 @@
 	$v = array("action"=>$action,"method"=>"post");
 	$f = new Form($v);
 	
-	$v = array("type"=>"text","name"=>"ID_CLASSIFICAO ","placeholder"=>"ID_CLASSIFICACAO...","value"=>$value_id_classificacao);
+	$v = array("type"=>"number","name"=>"ID_CLASSIFICACAO","placeholder"=>"ID_CLASSIFICACAO...","value"=>$value_id_classificacao);
 	$f->add_input($v);
 	if($disabled == true){
 		array("type"=>"hidden", "name"=>"ID_CLASSIFICACAO", "placeholder"=>"ID DA CLASSIFICACAO");
@@ -72,7 +72,7 @@
 	$v = array("type"=>"button","texto"=>"ENVIAR");
 	$f->add_button($v);	
 ?>
-<h3>Formulário - Inserir CLASSIFICACAO</h3>
+<h3>Formulário - Inserir Classificação</h3>
 <div id="status"></div>
 <hr />
 <?php
@@ -85,12 +85,13 @@
 		//defina a seguinte regra para o botao de envio
 		$("button").click(function(){
 			$.ajax({
-				url: "insere.php?tabela=CLASSIFICACAO",
+				url: "insere.php?tabela=classificacao",
 				type: "post",
 				data:
-					{ID_PAIS: $("input[name='ID_CLASSIFICACAO']").val(),
-					NOME_PAIS: $("input[name='CLASSIFICACAO_INDICATIVA']").val(),
-					ID_REGIAO: $("select[name='ID_FILME'").val()
+					{
+					ID_CLASSIFICACAO: $("input[name='ID_CLASSIFICACAO']").val(),
+					CLASSIFICACAO_INDICATIVA: $("input[name='CLASSIFICACAO_INDICATIVA']").val(),
+					ID_FILME: $("select[name='ID_FILME'").val()
 					},
 				beforeSend: function(){
 					$("button").attr("disabled", true);

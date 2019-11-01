@@ -15,7 +15,7 @@
 		require_once("classeControllerBD.php");
 		$c = new ControllerBD($conexao);
 		$colunas = array("*");
-		$tabelas[0][0]="GENERO";
+		$tabelas[0][0]="genero";
 		$tabelas[0][1]=null;
 		$ordenacao = null;
 		$condicao = $_POST["id"];

@@ -9,6 +9,6 @@
 
 ?>
 <hr />
-<a href='lista_<?=$_POST["tabela"];?>.php'>Voltar Para a listagem</a>
+<a href='form_<?=$_POST["tabela"];?>.php'>Voltar Para o Formulario</a>
 </body>
 </html>

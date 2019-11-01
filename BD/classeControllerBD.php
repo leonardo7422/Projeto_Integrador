@@ -119,7 +119,7 @@
 			if($ordenacao!=null){
 				$sql .= " ORDER BY ".$ordenacao;
 			}
-			
+		
 			
 			$stmt = $this->conexao->prepare($sql);
 	

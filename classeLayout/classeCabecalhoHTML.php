@@ -15,6 +15,7 @@
 					 </head>
 					 <body>
 					 <nav>
+					 <b>Filmes em cartaz: <a href='index.php'></br>Filmes<a></br></b> <br />
 					 <b>Listar:</b> <br />
 			";
 			if($this->menu!=null){

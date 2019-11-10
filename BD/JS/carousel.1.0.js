@@ -40,13 +40,13 @@
             pause_able: false, // habilitado para pausar slides, por padrão false
             stop_on_hover: true, //habilitado para pausar o slides quando houver sobre imagens, por padrão true
             automatic: true, //habilitar passagem de tempo automatica de slides, padrao true
-            key_navegation: false, //habiltar para fazer navegação pelas setas, por padrão false //Melhorar este procedimento
-            time_to_change: 8000, // Tempo de troca de slides, por padrão 8 segundos
+            key_navegation: true, //habiltar para fazer navegação pelas setas, por padrão false //Melhorar este procedimento
+            time_to_change: 5000, // Tempo de troca de slides, por padrão 8 segundos
             list_img : [] ,//Lista de imagens
             menu: {}, //position dos seletor de slides, por padrão a esquerda e em baixo, usando um json como parametro
             icones_selector: "<i class='fa fa-circle'></i>", //icones dos seletores, por padrão fontAwesome
             liClass: "", //Classe para seletores li, por padrão sem classe
-            color: "#000" //Cor da fonte, usando para fontAwesome, padrão petro #000
+            color: "a51b0b" //Cor da fonte, usando para fontAwesome, padrão petro #000
         };
         
         //Mesclando os parametros passados por atributes hmlt5  ou por js, dando prioridade para o atributes
@@ -66,7 +66,7 @@
           "position" : "relative",
           "height": options.img_height,
           "width": options.img_width ,
-          "margin" : "0px auto",
+          "margin" : "px auto",
           "background-size": 'contain', 
           "background-position": "center center", 
           "background-repeat": 'no-repeat'

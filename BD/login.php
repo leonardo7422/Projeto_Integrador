@@ -18,4 +18,4 @@ $db = mysql_select_db('alfred');
         header("Location:index.php");
       }
   }
-?>
+?> 

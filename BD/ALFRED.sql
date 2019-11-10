@@ -1,16 +1,23 @@
 
-DROP database IF EXISTS ALFRED;
+DROP database if exists ALFRED;
 
-CREATE DATABASE IF NOT EXISTS ALFRED;
+CREATE DATABASE if not exists ALFRED;
+
+
 
 USE ALFRED;
 
 
+Create table usuarios (
+ID Int UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
+login Varchar(30),
+senha Varchar(40),
+Primary Key (ID)) ENGINE = MyISAM;
 
 CREATE TABLE IF NOT EXISTS USUARIO (
     ID_USUARIO INT NOT NULL PRIMARY KEY,
     CEP VARCHAR(9),
-    ACESSO VARCHAR(50),
+    ACESSO enum('ADM', 'USU'),
     EMAIL VARCHAR(50),
     NOME_USUARIO VARCHAR(50)
 );
@@ -36,6 +43,7 @@ CREATE TABLE IF NOT EXISTS FILME (
     ID_DIRETOR INT NOT NULL,
     ID_GENERO INT NOT NULL,
     TITULO VARCHAR(50),
+    SINOPSE VARCHAR(300),
     FICHA_TECNICA VARCHAR(100),
     DATA_ESTREIA DATE,
     DATA_RETIRADA DATE,
@@ -151,9 +159,12 @@ INSERT INTO GENERO VALUES (10, 'Acão');
 INSERT INTO GENERO VALUES (20, 'Aventura');
 INSERT INTO GENERO VALUES (30, 'Comédia');
 
-INSERT INTO FILME VALUES (100, 4, 7, 10, 'Django Livre', 'Ano: 2019, Duração: 180 minutos', '2019-10-01', '2019-11-01');
-INSERT INTO FILME VALUES (200, 6, 9, 30, 'Coringa', 'Ano: 2019, Duração: 120 minutos', '2019-08-03', '2019-10-01');
-INSERT INTO FILME VALUES (300, 5, 8, 20, 'High School Musical', 'Ano: 2010, Duração: 500 minutos', '2010-05-01', '2010-06-01');
+INSERT INTO FILME VALUES (100, 4, 7, 10, 'Django Livre','No sul dos Estados Unidos, anos antes da Guerra Civil, um ex-escravo Django faz uma aliança inesperada com o caçador de recompensas Schultz para caçar os criminosos mais procurados do país e resgatar sua esposa de um fazendeiro que força seus escravos a participarem de competições mortais.',
+ 'Ano: 2019, Duração: 180 minutos', '2019-10-01', '2019-11-01');
+INSERT INTO FILME VALUES (200, 6, 9, 30, 'Coringa', 'O comediante falido Arthur Fleck encontra violentos bandidos pelas ruas de Gotham City. Desconsiderado pela sociedade, Fleck começa a ficar louco e se transforma no criminoso conhecido como Coringa.',
+ 'Ano: 2019, Duração: 120 minutos', '2019-08-03', '2019-10-01');
+INSERT INTO FILME VALUES (300, 5, 8, 20, 'Resident Evil', 'Alice e Rain Ocampo têm a missão de destruir um laboratório genético operado pela poderosa corporação Umbrella, um dos maiores conglomerados do mundo, onde um vírus foi disseminado, matando seu criador e ressurgindo como uma criatura demoníaca, que sente uma fome incontrolável e transforma todas as suas vítimas em zumbis. O time tem apenas três horas para evitar que o vírus invada a Terra.',
+ 'Ano: 2002, Duração: 500 minutos', '2010-05-01', '2010-06-01');
 
 INSERT INTO GENERO_FILME VALUES (200, 30);
 INSERT INTO GENERO_FILME VALUES (100, 10);
@@ -193,7 +204,16 @@ INSERT INTO SESSAO VALUES (702,'cinemaxingresso.com.br', '21:30:00', 40);
 
 
 
+select * 
+from filme, genero_filme, genero, diretor, ator
+WHERE filme.id_filme = genero_filme.id_filme
+and genero_filme.id_genero = genero.id_genero
+and filme.id_diretor = diretor.id_diretor
+and filme.id_ator = ator.id_ator
+and titulo like 'CORINGA%';
 
 
+select * 
+from USUARIOS;
 
 

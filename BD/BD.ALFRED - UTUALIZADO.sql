@@ -144,4 +144,26 @@ CREATE TABLE IF NOT EXISTS SESSAO (
 SELECT *
 FROM USUARIO;
 
-	INSERT INTO usuario VALUES ('14809-300', 'ADM', 'leo_canceriano@hotmail.com', '123', '123')
+
+    SELECT NOME FROM USUARIO WHERE login = 123;
+
+	SELECT ID_ATOR AS value, NOME_ATOR AS texto FROM ATOR ORDER BY NOME_ATOR;
+    
+    insert into classificacao values (1, '18');
+    
+    insert into filme values (1, 1, 1, 1, 'Coringa', 'aaaaaaaaaaaaaaaaaa', 'Duração: 190 min', '2019-10-10', '2019-11-10');
+    
+    insert into genero_filme values (1, 1);
+    
+    SELECT * 
+	FROM filme, genero_filme, genero, diretor, ator
+	WHERE filme.id_filme = genero_filme.id_filme
+	AND genero_filme.id_genero = genero.id_genero
+	AND filme.id_diretor = diretor.id_diretor
+	AND filme.id_ator = ator.id_ator
+	AND titulo like'Coringa%';
+    
+    SELECT CLASSIFICACAO_INDICATIVA, TITULO
+	FROM CLASSIFICACAO, FILME
+	WHERE FILME.ID_CLASSIFICACAO = CLASSIFICACAO.ID_CLASSIFICACAO
+	AND TITULO LIKE 'Coringa%'

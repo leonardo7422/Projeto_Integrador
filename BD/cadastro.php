@@ -1,10 +1,16 @@
 <?php 
- 
+
+$cep = $_POST['cep'];
+$email = $_POST['email'];
+$nome = $_POST['nome'];
 $login = $_POST['login'];
 $senha = MD5($_POST['senha']);
+$acesso = "USUARIO";
+
+
 $connect =  mysql_connect('localhost','root','usbw');
 $db = mysql_select_db("ALFRED");
-$query_select = "SELECT login FROM usuarios WHERE login = '$login'";
+$query_select = "SELECT login FROM usuario WHERE login = '$login'";
 $select = mysql_query($query_select,$connect);
 $array = mysql_fetch_array($select);
 $logarray = $array['login'];
@@ -23,13 +29,16 @@ $logarray = $array['login'];
         die();
  
       }else{
-        $query = "INSERT INTO usuarios (login,senha) VALUES ('$login','$senha')";
+        $query = "INSERT INTO usuario (cep,acesso,email,nome,login,senha) VALUES ('$cep', '$acesso', '$email', '$nome', '$login', '$senha')";
         $insert = mysql_query($query,$connect);
          
         if($insert){
           echo"<script language='javascript' type='text/javascript'>
           alert('Usuário cadastrado com sucesso!');window.location.
           href='login.html'</script>";
+
+
+
         }else{
           echo"<script language='javascript' type='text/javascript'>
           alert('Não foi possível cadastrar esse usuário');window.location

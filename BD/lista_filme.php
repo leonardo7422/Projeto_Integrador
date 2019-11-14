@@ -1,26 +1,40 @@
 
 <style> 
 
+body{text-align: left; }
 
-   .titulo {
-    font-family: "Akkurat Light Pro";
-	text-indent: 1.5em;
-    
-    font-size: 35px;
-    float: left;
-    border-bottom: 3px solid #363636;
-    padding-bottom: 5px;
+.estrelas input[type=radio] {
+  display: none;
+}
+.estrelas label i.fa{
+  font-size: 1.8em;
+  margin: 30px
+  
+
+}
+.estrelas label i.fa:before {
+  content:'\f005';
+  color: #FC0;
+}
+.estrelas input[type=radio]:checked ~ label i.fa:before {
+  color: #666;
 }
 
+   
 
+.fonte{
+	font-weight: bold;
+	
+    font-size: 1.5em;
+
+}
 
 .classificacao {
 	
     height: 12px;
     margin-top: 20px;
-    padding: 10px 7px;
+    padding: 7px;
     color: #fff;
-    text-align: center;
     border-radius: 8px;
     font-size: .7em;
 	float: none;
@@ -28,7 +42,7 @@
     font-size: 20px;
 }
 span{ 
-	color: white;
+	color: black;
 	
 	}
 .classificacao.c-LIVRE {
@@ -50,12 +64,13 @@ span{
     background: black;
 }
 #site {
-    padding: 5px;
-	
-	margin: 40px auto;
+	border-style: ridge;
+    padding: 15px;
+	margin: 20px auto;
 	background: #FFF; /* fundo branco para navegadores que não suportam rgba */
 	background: rgba(255,255,255,0.8); /* fundo branco com um pouco de transparência */
 }
+
 
 body {
 	
@@ -66,9 +81,6 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 }p {
-	align:left;
-  border-bottom: 3px solid black;
-  width: 0%;
   background-color: lightgrey;
 
 }
@@ -76,13 +88,16 @@ body {
 h3{
 	text-align:left;
 	text-indent: 3.0em;
+	width: 700px; 
+	font-size: 20px;
+
 
 }
 
 h2{
 	font-family: "Gill Sans", sans-serif;
-	width: 1500px;
-	text-indent: 3.0em;
+	text-align: left;
+
 	
 
 
@@ -90,13 +105,13 @@ h2{
 
  h1{ letter-spacing: 5px;
 	text-indent: 1.5em;
-	font-family: "Akkurat Light Pro";
 
 
 }
 	img{
-		border: 5px solid red;
-	margin: 10px;
+		position: right; 
+	left: 300px; /* posiciona a 90px para a esquerda */ 
+	top: 70px; /* posiciona a 70px para baixo */
 
 			}
 
@@ -109,7 +124,30 @@ h2{
 	</style>
 
 <?php
+session_start();
+
+
+$filme = $_GET["var"];
+
+$_SESSION["var"] = $filme; 
+
+
+include("conexao.php");
+
+$sql = "SELECT *
+FROM filme";
+
+$stmt = $conexao->prepare($sql);
+	
+	$stmt->execute();
+
+
+
+include("cabecalholayout.php");
+
 echo"<div id='site'";
+
+
 
   $login_cookie = $_COOKIE['login'];
     if(isset($login_cookie)){ 
@@ -128,10 +166,9 @@ echo"<div id='site'";
 
 	echo"</div>";
 	
-	include("conexao.php");
 	
 
-	$filme = $_GET["var"];
+	
 
 
 	
@@ -165,8 +202,8 @@ echo"<div id='site'";
 
 	$sql = "SELECT CLASSIFICACAO_INDICATIVA, TITULO
 	FROM CLASSIFICACAO, FILME
-	WHERE FILME.ID_FILME = CLASSIFICACAO.ID_FILME
-	AND TITULO LIKE '$filme%'";
+	WHERE FILME.ID_CLASSIFICACAO = CLASSIFICACAO.ID_CLASSIFICACAO
+	AND TITULO = '$titulo'";
 	
 	$stmt = $conexao->prepare($sql);
 	
@@ -187,18 +224,25 @@ echo"<div id='site'";
 	echo"<div id='site'";
 
 
-	echo"<br/>";
-
-		echo" <img src='JS/$filme.jpg'  align = 'left' weight=500px width = 500px />";
+	echo"<span class='fonte'><span class='vermelho'>".$titulo."</span>";
 
 
 
 		
 	
 
-		echo"<h2>$titulo <span class='classificacao c-$classificacao'>$classificacao</span></h2>";
+		  echo" <span class='classificacao c-$classificacao'>$classificacao</span><br/><br/><img src='js/$titulo.jpg'   weight=700px  width = 400px />";
 
-		echo"<br/><h2>Trailer:
+		
+echo"<h3>Avalie o filme:</h3>";
+
+
+
+
+	
+
+
+		echo"<h3>Trailer:
 		<br/>
 		<video width=\"700\" height=\"400\"  controls=\"controls\" autoplay=\"autoplay\">
 		<source src='$filme.mp4' type=\"video/mp4\"></h3>";
@@ -209,16 +253,16 @@ echo"<div id='site'";
 			
 
 		  
-		  echo "<p><h2>Sinope:</h2>"; echo"<h2>$sinopse"; echo"</p>";
+		  echo "<p><h3>Sinope: $sinopse</h3></p>";
 		  
 
-		  echo"<h2>$ficha_tecnica</h2>"; 
+		  echo"<h3>$ficha_tecnica</h3>"; 
 
-		  echo"<p><h2>Sinope: $descricao_genero</h2>"; 
+		  echo"<p><h3>Gênero: $descricao_genero</h3>"; 
 
-		  echo"<p><h2>Diretor: $nome_diretor</h2>"; 
+		  echo"<p><h3>Diretor: $nome_diretor</h3>"; 
 
-		  echo"<p><h2>Lancamento: $data_estreia</h2>"; 
+		  echo"<p><h3>Lancamento: $data_estreia</h3>"; 
 		  
 
 	
@@ -226,8 +270,6 @@ echo"<div id='site'";
 
 	
 	
-	echo "</tbody>
-		</table>
-		</div>";
+	echo "	</div>";
 	$filme = null;
 ?> 

@@ -1,9 +1,40 @@
+<?php
+
+include("conexao.php");
+
+$sql = "SELECT *
+FROM filme";
+
+$stmt = $conexao->prepare($sql);
+	
+	$stmt->execute();
+
+
+
+include("cabecalholayout.php");
+
+?>
+
 <div id="site">
+    
 <?php
 
   $login_cookie = $_COOKIE['login'];
+
+  $sql = "SELECT NOME FROM USUARIO WHERE login = '$login_cookie'";
+	
+	$stmt = $conexao->prepare($sql);
+	
+	$stmt->execute();
+
+	while($linha=$stmt->fetch()){		
+
+		$nome = $linha["NOME"];
+	}
+
+
     if(isset($login_cookie)){
-      echo"Bem-Vindo, $login_cookie <br>";
+      echo"Bem-Vindo, $nome <br>";
       echo"<p>Essas informações <font color='red'>PODEM</font> ser acessadas por você</p>";
     }else{
       echo"Bem-Vindo, convidado <br>";
@@ -18,12 +49,10 @@
 <meta charset="UTF-8" />
 <title>ALFRED</title>
 <style>
-
 * {
 	margin: 0;
 	padding:0;
 }
-
 h1{
 	text-align: center;
 }
@@ -32,7 +61,6 @@ body, html {
 	height: 100%;
 	font-family: Arial, Tahoma, sans-serif;
 }
-
 body {
 	background: url(cinema.jpg) center center no-repeat fixed;
 	
@@ -41,14 +69,12 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 }
-
 #site {
 	width: 560px;
 	padding: 20px;
 	margin: 40px auto;
 	background: #FFF; 
 	background: rgba(255,255,255,0.8);
-
 p {
 	margin-bottom: 1.5em;
 }</style>
@@ -58,15 +84,11 @@ p {
 </head>
 <body>
 	
-	<h1>ALFRED</h1>
 <meta charset="UTF-8">
 <title>ALFRED</title>
 <?php
-
 include("../classeLayout/classeCabecalhoHTML.php");
 include("cabecalho.php");
-
-
 ?>
 <br/>
 
@@ -90,8 +112,8 @@ include("cabecalho.php");
 
 	<div class='carousel' data-height='80%' data-width='500px' data-effect='size' data-stop_on_hover='true'>
 	<a href="lista_filme.php?var=coringa" style="border-bottom: none;"><img src='js/coringa.jpg' alt="Coringa"/></a>
-	<a href="lista_filme.php?var=resident" style="border-bottom: none;"><img src='js/resident.jpg' alt="Resident Evil"/></a>
-	<a href="lista_filme.php?var=django" style="border-bottom: none;"><img src='js/django.jpg' alt="Django Livre"/></a>
+	<a href="lista_filme.php?var=resident " style="border-bottom: none;"><img src='js/resident evil.jpg' alt="Resident Evil"/></a>
+	<a href="lista_filme.php?var=django" style="border-bottom: none;"><img src='js/django livre.jpg' alt="Django Livre"/></a>
 	
 	
 	

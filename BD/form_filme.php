@@ -24,7 +24,7 @@
 		$value_id_filme = $linha["ID_FILME"];
 		$value_id_ator = $linha["ID_ATOR"];
 		$value_id_diretor = $linha["ID_DIRETOR"];
-		$value_id_genero = $linha["ID_GENERO"];
+		$value_id_classificacao = $linha["ID_CLASSIFICACAO"];
 		$value_titulo = $linha["TITULO"];
 		$value_ficha_tecnica =   $linha["FICHA_TECNICA"];
 		$value_data_estreia = $linha["DATA_ESTREIA"];
@@ -41,7 +41,7 @@
         $value_id_filme = null;
 		$value_id_ator =  null;
 		$value_id_diretor =  null;
-		$value_id_genero =  null;
+		$value_id_classificacao =  null;
 		$value_titulo =  null;
 		$value_ficha_tecnica =  null;
 		$value_data_estreia =  null;
@@ -69,13 +69,13 @@
 		$matriz_diretor[] = $linha;
 	}	
 
-	$select = "SELECT ID_GENERO AS value, DESCRICAO_GENERO AS texto FROM genero ORDER BY DESCRICAO_GENERO";
+	$select = "SELECT ID_CLASSIFICACAO AS value, CLASSIFICACAO_INDICATIVA AS texto FROM classificacao";
 	
 	$stmt = $conexao->prepare($select);
 	$stmt->execute();
 	
 	while($linha=$stmt->fetch()){
-		$matriz_genero[] = $linha;
+		$matriz_classificacao[] = $linha;
 	}	
 
 
@@ -97,8 +97,8 @@
 	$v = array("name"=>"ID_DIRETOR","label"=>"Diretor do Filme","selected"=>$value_id_diretor);
 	$f->add_select($v,$matriz_diretor);
 
-	$v = array("name"=>"ID_GENERO","label"=>"Gênero do Filme","selected"=>$value_id_genero);
-	$f->add_select($v,$matriz_genero);
+	$v = array("name"=>"ID_CLASSIFICACAO","label"=>"Classificação do Filme","selected"=>$value_id_classificacao);
+	$f->add_select($v,$matriz_classificacao);
 
 	$v = array("type"=>"text","name"=>"TITULO","placeholder"=>"TÍTULO DO FILME...","value"=>$value_titulo);
 	$f->add_input($v);
@@ -134,7 +134,7 @@ $("button").click(function(){
 						ID_FILME: $("input[name='ID_FILME']").val(),
 						ID_ATOR: $("select[name='ID_ATOR']").val(),
 						ID_DIRETOR: $("select[name='ID_DIRETOR']").val(),
-						ID_GENERO: $("select[name='ID_GENERO']").val(),
+						ID_CLASSIFICACAO: $("select[name='ID_CLASSIFICACAO']").val(),
 						TITULO: $("input[name='TITULO']").val(),
 						FICHA_TECNICA: $("input[name='FICHA_TECNICA']").val(),
 						DATA_ESTREIA: $("input[name='DATA_ESTREIA']").val(),
@@ -144,6 +144,7 @@ $("button").click(function(){
 						$("button").attr("disabled",true);
 					},
 					success: function(d){
+						console.log(d);
 						$("button").attr("disabled",false);
 						if(d=='1'){
 							$("#status").html("Filme inserido com sucesso.");

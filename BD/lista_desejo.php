@@ -1,16 +1,3 @@
-<?php
-
-$login_cookie = $_COOKIE['login'];
-
-if(isset($login_cookie)){ 
-
-
-
-}else{
-
-  header("Location:login.html");
-}
-?>
 <style> 
 
 .tim {
@@ -146,17 +133,17 @@ h2{
 
 		}
 	</style>
-
 <?php
 
+$login_cookie = $_COOKIE['login'];
 
-session_start();
 
+if(isset($login_cookie)){
+    
+}else{
 
-$filme = $_GET["var"];
-
-$_SESSION["var"] = $filme; 
-
+  header("Location:login.html");
+}
 
 include("conexao.php");
 
@@ -167,125 +154,85 @@ $stmt = $conexao->prepare($sql);
 	
 $stmt->execute();
 
-
-
 include("cabecalholayout.php");
 
 echo"<div id='site'";
 
-$acesso = $_COOKIE['acesso'];
+include("../classeLayout/classeCabecalhoHTML.php");
 
-if($acesso == 'ADM'){
-	include("../classeLayout/classeCabecalhoHTML.php");
-	include("cabecalho.php");
-	echo"</div>";
 
-	}
+if(!empty($_GET['filme'])) 
+{
+$_SESSION['filme']= $_GET['filme'];
 
-	
-	$sql = "SELECT * 
-	FROM filme, genero_filme, genero, diretor, ator
-	WHERE filme.id_filme = genero_filme.id_filme
-	AND genero_filme.id_genero = genero.id_genero
-	AND filme.id_diretor = diretor.id_diretor
-	AND filme.id_ator = ator.id_ator
-	AND titulo = '$filme'";
+$filme = $_SESSION["filme"];
+
+$sql = "SELECT *
+from filme
+where titulo = '$filme'";
 	
 	$stmt = $conexao->prepare($sql);
 	
 	$stmt->execute();
 
 	while($linha=$stmt->fetch()){
+                        
+        $id_filme = $linha["ID_FILME"];
+    } 		
+
+    $sql = "SELECT *
+from usuario
+where login = '$login_cookie'";
 	
-			
-				
+	$stmt = $conexao->prepare($sql);
+	
+	$stmt->execute();
 
-		$titulo = $linha["TITULO"];
-		$sinopse = $linha["SINOPSE"];			 
-		$ficha_tecnica = $linha["FICHA_TECNICA"];
-		$data_estreia = $linha["DATA_ESTREIA"];
-		$descricao_genero = $linha["DESCRICAO_GENERO"];
-		$nome_diretor = $linha["NOME_DIRETOR"];
-			
-
-
+	while($linha=$stmt->fetch()){
+                        
+        $id_usuario = $linha["ID_USUARIO"];
 }
 
-	$sql = "SELECT CLASSIFICACAO_INDICATIVA, TITULO
-	FROM CLASSIFICACAO, FILME
-	WHERE FILME.ID_CLASSIFICACAO = CLASSIFICACAO.ID_CLASSIFICACAO
-	AND TITULO = '$titulo'";
+$sql = "INSERT INTO lista_desejo (id_usuario, id_filme) VALUES ($id_usuario,$id_filme)";
+
+$conexao->prepare($sql)->execute([$id_usuario, $id_filme]);
+
+
+        }
+
+
+
+//FILMES PRA LISTAR CASO JÁ TENHA NA LISTA DE DESEJO
+$sql = "SELECT *
+from lista_desejo, usuario, filme
+where usuario.id_usuario = lista_desejo.id_usuario
+and lista_desejo.id_filme = filme.id_filme
+and login = '$login_cookie'";
 	
 	$stmt = $conexao->prepare($sql);
 	
 	$stmt->execute();
 
-	while($linha=$stmt->fetch()){
+    if($conexao->prepare($sql) != null){
+    while($linha=$stmt->fetch()){
+                        
+        $id_filme = $linha["ID_FILME"];
+        $titulo = $linha["TITULO"];
 
+        echo"<p>$titulo</p>";
 
-		$classificacao = $linha["CLASSIFICACAO_INDICATIVA"];
-		$titulo = $linha["TITULO"];
-
-	}
-
-
-	
-	
-
-	echo"<div id='site'";
-
-
-	echo"<span class='fonte'><span class='vermelho'>".$titulo."</span>";
-
-
-
-		
-	
-
-		  echo" <span class='classificacao c-$classificacao'>$classificacao</span><br/><br/><img src='js/$titulo.jpg'   weight=700px  width = 400px />";
-
-		
-echo"<p><li>Avalie o filme:</p></li>";
+}
+    }
+    else
+    {
+        echo"<p>Adicione filmes em Sua Lista de Desejo";
+    }
+?>
 
 
 
 
-	
-
-
-		echo"<p><li>Trailer:
-		<br/>
-		<video width=\"700\" height=\"400\"  controls=\"controls\" autoplay=\"autoplay\">
-		<source src='$filme.mp4' type=\"video/mp4\"></li></p>";
-		
 
 
 
-			
 
-		  
-		  echo "<p><li>Sinope: $sinopse</li></p>";
-		  
-
-		  echo"<p><li>$ficha_tecnica</li></p>"; 
-
-		  echo"<p><li>Gênero: $descricao_genero</li></p>"; 
-
-		  echo"<p><li>Diretor: $nome_diretor</li></p>"; 
-
-		  echo"<p><li>Lancamento: $data_estreia</li></p>"; 
-		  
-		 echo" <form action='lista_desejo.php' method='get'>";
-
-		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar Filme em Sua Lista de Desejo</a>";
-
-
-		
-	
-
-
-	
-	
-	echo "	</div>";
-	$filme = null;
-?> 

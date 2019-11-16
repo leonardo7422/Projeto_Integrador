@@ -144,4 +144,75 @@ CREATE TABLE IF NOT EXISTS SESSAO (
 SELECT *
 FROM USUARIO;
 
-	INSERT INTO usuario VALUES ('14809-300', 'ADM', 'leo_canceriano@hotmail.com', '123', '123')
+
+    SELECT NOME FROM USUARIO WHERE login = 123;
+
+	SELECT ID_ATOR AS value, NOME_ATOR AS texto FROM ATOR ORDER BY NOME_ATOR;
+    
+
+    
+    insert into classificacao values (1, '18');
+    
+	insert into ator values (1, "Joaquin Phoenix");
+    	insert into ator values (2, "TESTE TESTE");
+    
+    insert into diretor values (1, "Todd Phillips");
+    	insert into diretor values (2, "TESTE TESTE");
+    
+    insert into genero values (1, "Comédia");
+    	insert into genero values (2, "TESTE TESTE");
+    
+    insert into filme values (1, 1, 1, 1, 'Coringa', 'aaaaaaaaaaaaaaaaaa', 'Duração: 190 min', '2019-10-10', '2019-11-10');
+        insert into filme values (2, 2, 2, 1, 'Resident Evil', 'aaaaaaaaaaaaaaaaaa', 'Duração: 190 min', '2019-10-10', '2019-11-10');
+    
+    insert into genero_filme values (1, 1);
+      	insert into genero_filme values (2, 2);
+    
+    SELECT * 
+	FROM filme, genero_filme, genero, diretor, ator
+	WHERE filme.id_filme = genero_filme.id_filme
+	AND genero_filme.id_genero = genero.id_genero
+	AND filme.id_diretor = diretor.id_diretor
+	AND filme.id_ator = ator.id_ator
+	AND titulo like'Coringa%';
+    
+    SELECT CLASSIFICACAO_INDICATIVA, TITULO
+	FROM CLASSIFICACAO, FILME
+	WHERE FILME.ID_CLASSIFICACAO = CLASSIFICACAO.ID_CLASSIFICACAO
+	AND TITULO LIKE 'Coringa%';
+    
+select *
+from usuario;
+    
+SELECT id_usuario
+from usuario
+where login = 'leo';
+
+SELECT *
+from filme;
+
+select *
+from lista_desejo;
+
+SELECT *
+from usuario
+;
+
+INSERT INTO lista_desejo VALUES ('1', '1');
+
+select *
+from lista_desejo;
+
+DELETE FROM lista_desejo
+WHERE ID_filme = 2;
+
+SELECT * 
+	FROM filme,ator,diretor,genero_filme
+    where ator.id_ator = filme.id_ator
+    and filme.id_filme = genero_filme.id_filme
+    and diretor.id_diretor = filme.id_diretor;
+    
+    SELECT *
+from usuario;
+
+insert into usuario values( 2, 00000000, 'ADM', 'admin@123.com', 'Admin', 'admin', '202cb962ac59075b964b07152d234b70');

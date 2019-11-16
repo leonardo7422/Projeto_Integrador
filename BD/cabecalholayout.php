@@ -20,20 +20,23 @@
         while($linha=$stmt->fetch()){
 	
 			
-				
-
     $titulo = $linha["TITULO"];
         echo"
         <li><a href='lista_filme.php?var=$titulo'>$titulo</a></li>";
-
-
-
 }
-?>
+
+
+   ?>
         </ul>
       </li>
       <li><a href="lista_desejo.php">Lista de Desejos</a></li>
       <li><a href="filmes_assistidos.php">Filmes Já Assistidos</a></li>
+      <li><a href="logout.php">Logout</a></li>
+   
+
+   
+  </script>
+
     </ul>
   </div>
 </nav>

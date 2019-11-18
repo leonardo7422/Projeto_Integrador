@@ -75,7 +75,7 @@ body, html {
 	font-family: Arial, Tahoma, sans-serif;
 }
 body {
-	background: url(cinema.jpg) center center no-repeat fixed;
+	background: url(img/cinema.jpg) center center no-repeat fixed;
 	
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -126,9 +126,9 @@ include("cabecalho.php");
 <form action="lista_filme.php" method="post">
 
 	<div class='carousel' data-height='80%' data-width='500px' data-effect='size' data-stop_on_hover='true'>
-	<a href="lista_filme.php?var=Coringa" style="border-bottom: none;"><img src='js/coringa.jpg' alt="Coringa"/></a>
-	<a href="lista_filme.php?var=Resident Evil" style="border-bottom: none;"><img src='js/resident evil.jpg' alt="Resident Evil"/></a>
-	<a href="lista_filme.php?var=Her" style="border-bottom: none;"><img src='js/Her.jpg' alt="Her"/></a>
+	<a href="lista_filme.php?var=Coringa" style="border-bottom: none;"><img src='img/coringa.jpg' alt="Coringa"/></a>
+	<a href="lista_filme.php?var=Resident Evil" style="border-bottom: none;"><img src='img/resident evil.jpg' alt="Resident Evil"/></a>
+	<a href="lista_filme.php?var=Her" style="border-bottom: none;"><img src='img/Her.jpg' alt="Her"/></a>
 
 	
 	

@@ -3,10 +3,9 @@
 $login_cookie = $_COOKIE['login'];
 
 if(isset($login_cookie)){ 
-
-
-
-}else{
+}
+else
+{
 
   header("Location:login.html");
 }
@@ -25,7 +24,9 @@ button:hover {
     cursor: pointer;
 }
 
-body{text-align: left; }
+body{
+	text-align: left; 
+}
 
 .estrelas input[type=radio] {
   display: none;
@@ -33,28 +34,23 @@ body{text-align: left; }
 .estrelas label i.fa{
   font-size: 1.8em;
   margin: 30px
-  
-
 }
+
 .estrelas label i.fa:before {
   content:'\f005';
   color: #FC0;
 }
+
 .estrelas input[type=radio]:checked ~ label i.fa:before {
   color: #666;
 }
 
-   
-
 .fonte{
 	font-weight: bold;
-	
     font-size: 1.5em;
-
 }
 
 .classificacao {
-	
     height: 12px;
     margin-top: 20px;
     padding: 7px;
@@ -65,10 +61,10 @@ body{text-align: left; }
     vertical-align: middle;
     font-size: 20px;
 }
+
 span{ 
 	color: black;
-	
-	}
+}
 .classificacao.c-LIVRE {
     background: green;
 }
@@ -87,6 +83,7 @@ span{
 .classificacao.c-18 {
     background: black;
 }
+
 #site {
 	border-style: ridge;
     padding: 15px;
@@ -95,10 +92,8 @@ span{
 	background: rgba(255,255,255,0.8); /* fundo branco com um pouco de transparência */
 }
 
-
-body {
-	
-	background: url(cinema.jpg) center center no-repeat fixed;
+body {	
+	background: url(img/cinema.jpg) center center no-repeat fixed;
 	
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -106,7 +101,6 @@ body {
 	background-size: cover;
 }p {
   background-color: lightgrey;
-
 }
 
 h3{
@@ -114,42 +108,30 @@ h3{
 	text-indent: 3.0em;
 	width: 700px; 
 	font-size: 20px;
-
-
 }
 
 h2{
 	font-family: "Gill Sans", sans-serif;
 	text-align: left;
-
-	
-
-
 }
 
- h1{ letter-spacing: 5px;
+h1{ 
+	 letter-spacing: 5px;
 	text-indent: 1.5em;
-
-
 }
-	img{
+img{
 		position: right; 
 	left: 300px; /* posiciona a 90px para a esquerda */ 
 	top: 70px; /* posiciona a 70px para baixo */
-
 			}
 
-		video{
+video{
 	left: 50px;
 	margin: 20px;
-
-
 		}
 	</style>
 
 <?php
-
-
 session_start();
 
 
@@ -167,8 +149,6 @@ $stmt = $conexao->prepare($sql);
 	
 $stmt->execute();
 
-
-
 include("cabecalholayout.php");
 
 echo"<div id='site'";
@@ -179,10 +159,8 @@ if($acesso == 'ADM'){
 	include("../classeLayout/classeCabecalhoHTML.php");
 	include("cabecalho.php");
 	echo"</div>";
-
 	}
 
-	
 	$sql = "SELECT * 
 	FROM filme, genero_filme, genero, diretor, ator
 	WHERE filme.id_filme = genero_filme.id_filme
@@ -196,19 +174,13 @@ if($acesso == 'ADM'){
 	$stmt->execute();
 
 	while($linha=$stmt->fetch()){
-	
-			
-				
 
 		$titulo = $linha["TITULO"];
 		$sinopse = $linha["SINOPSE"];			 
 		$ficha_tecnica = $linha["FICHA_TECNICA"];
 		$data_estreia = $linha["DATA_ESTREIA"];
 		$descricao_genero = $linha["DESCRICAO_GENERO"];
-		$nome_diretor = $linha["NOME_DIRETOR"];
-			
-
-
+		$nome_diretor = $linha["NOME_DIRETOR"];			
 }
 
 	$sql = "SELECT CLASSIFICACAO_INDICATIVA, TITULO
@@ -228,45 +200,19 @@ if($acesso == 'ADM'){
 
 	}
 
-
-	
-	
-
 	echo"<div id='site'";
-
 
 	echo"<span class='fonte'><span class='vermelho'>".$titulo."</span>";
 
-
-
-		
+		  echo" <span class='classificacao c-$classificacao'>$classificacao</span><br/><br/><img src='img/$titulo.jpg'   weight=700px  width = 400px />";
 	
-
-		  echo" <span class='classificacao c-$classificacao'>$classificacao</span><br/><br/><img src='js/$titulo.jpg'   weight=700px  width = 400px />";
-
-		
 echo"<p><li>Avalie o filme:</p></li>";
 
 
-
-
-	
-
-
-		echo"<p><li>Trailer:
-		<br/>
-		<video width=\"700\" height=\"400\"  controls=\"controls\" autoplay=\"autoplay\">
-		<source src='$filme.mp4' type=\"video/mp4\"></li></p>";
-		
-
-
-
-			
-
-		  
+include("trailer.php");
+	  
 		  echo "<p><li>Sinope: $sinopse</li></p>";
 		  
-
 		  echo"<p><li>$ficha_tecnica</li></p>"; 
 
 		  echo"<p><li>Gênero: $descricao_genero</li></p>"; 
@@ -277,15 +223,16 @@ echo"<p><li>Avalie o filme:</p></li>";
 		  
 		 echo" <form action='lista_desejo.php' method='get'>";
 
-		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar Filme em Sua Lista de Desejo</a>";
+		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Desejo</a><br/>";
 
+		echo"<a href='filmes_assistidos.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Assistidos</a>";
 
-		
-	
-
-
-	
-	
 	echo "	</div>";
-	$filme = null;
-?> 
+
+echo"<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title> $titulo</title>";
+
+?>

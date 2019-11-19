@@ -137,6 +137,8 @@ session_start();
 
 $filme = $_GET["var"];
 
+
+
 $_SESSION["var"] = $filme; 
 
 
@@ -155,19 +157,21 @@ echo"<div id='site'";
 
 $acesso = $_COOKIE['acesso'];
 
-if($acesso == 'ADM'){
+if($acesso == 'adm'){
 	include("../classeLayout/classeCabecalhoHTML.php");
 	include("cabecalho.php");
 	echo"</div>";
 	}
 
 	$sql = "SELECT * 
-	FROM filme, genero_filme, genero, diretor, ator
+	FROM filme, genero_filme, genero, diretor, atores_filme, ator
 	WHERE filme.id_filme = genero_filme.id_filme
 	AND genero_filme.id_genero = genero.id_genero
 	AND filme.id_diretor = diretor.id_diretor
-	AND filme.id_ator = ator.id_ator
-	AND titulo = '$filme'";
+	AND filme.id_filme = atores_filme.id_filme
+    and atores_filme.id_ator = ator.id_ator
+	AND titulo like'$filme'
+    limit 1";
 	
 	$stmt = $conexao->prepare($sql);
 	
@@ -211,7 +215,7 @@ echo"<p><li>Avalie o filme:</p></li>";
 
 include("trailer.php");
 	  
-		  echo "<p><li>Sinope: $sinopse</li></p>";
+		  echo "<h3>Sinope: $sinopse</h3></p><br/>";
 		  
 		  echo"<p><li>$ficha_tecnica</li></p>"; 
 
@@ -223,10 +227,9 @@ include("trailer.php");
 		  
 		 echo" <form action='lista_desejo.php' method='get'>";
 
-		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Desejo</a><br/>";
+		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Desejo</a><br/><br/>";
 
-		echo"<a href='filmes_assistidos.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Assistidos</a>";
-
+include("avaliacao.php");
 	echo "	</div>";
 
 echo"<!DOCTYPE html>

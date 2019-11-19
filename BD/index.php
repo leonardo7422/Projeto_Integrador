@@ -100,7 +100,7 @@ p {
 <meta charset="UTF-8">
 <title>ALFRED</title>
 <?php
-if($acesso == 'ADM'){
+if($acesso == 'adm'){
 include("../classeLayout/classeCabecalhoHTML.php");
 include("cabecalho.php");
 }
@@ -129,6 +129,8 @@ include("cabecalho.php");
 	<a href="lista_filme.php?var=Coringa" style="border-bottom: none;"><img src='img/coringa.jpg' alt="Coringa"/></a>
 	<a href="lista_filme.php?var=Resident Evil" style="border-bottom: none;"><img src='img/resident evil.jpg' alt="Resident Evil"/></a>
 	<a href="lista_filme.php?var=Her" style="border-bottom: none;"><img src='img/Her.jpg' alt="Her"/></a>
+	<a href="lista_filme.php?var=As Aventuras de Pi" style="border-bottom: none;"><img src='img/As Aventuras de Pi.jpg' alt="Pi"/></a>
+
 
 	
 	

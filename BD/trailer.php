@@ -18,15 +18,17 @@
 
     <a href="#myModal" class="btn btn-lg btn-primary" data-toggle="modal">Trailer de <?php echo $titulo?></a>
     
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <iframe width="560" height="315" src="coringa.mp4" frameborder="0" allow="block; encrypted-media" allowfullscreen></iframe>
+    <?php
+    echo"<div id='myModal' class='modal fade'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-body'>
+                    <iframe width='560' height='315' src='trailer/$titulo.mp4' frameborder='0' allow='block; encrypted-media' allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-    </div>
+    </div>";
+    ?>
  
 </div>     
 </body>

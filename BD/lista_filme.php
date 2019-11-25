@@ -226,10 +226,50 @@ include("trailer.php");
 		  echo"<p><li>Lancamento: $data_estreia</li></p>"; 
 		  
 		 echo" <form action='lista_desejo.php' method='get'>";
+		
+		include("avaliacao.html");
 
-		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Desejo</a><br/><br/>";
 
-include("avaliacao.php");
+
+		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Desejo</a><br/>";
+
+		echo"<a href='filmes_assistidos.php?filme=$titulo'>Já assistiu $titulo?</a><br/><br/>";
+
+
+?>
+<script>
+
+$("Avaliar()").click(function(){
+	$.ajax({
+			url: "lista_filme.php?var=$titulo",
+			type: "post",
+			data: {
+					id: $("rating").val(),
+					
+				},
+				beforeSend: function(){
+					$("button").attr("disabled",true);
+				},
+				success: function(d){
+					console.log(d);
+					$("button").attr("disabled",false);
+					if(d=='1'){
+						$("#status").html("Filme inserido com sucesso.");
+						$("#status").css("color","purple");
+
+					}
+					else
+					{
+						$("#status").html("Filme não inserido: Codigo já existente.");
+						$("#status").css("color","yellow");
+					}
+				}
+	});
+});
+});
+
+</script>
+<?php
 	echo "	</div>";
 
 echo"<!DOCTYPE html>

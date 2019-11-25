@@ -13,7 +13,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Filmes<span class="caret"></span></a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Filmes Não Assistidos<span class="caret"></span></a>
         <ul class="dropdown-menu">
         <?php
         

@@ -204,29 +204,43 @@ $conexao->prepare($sql)->execute([$id_usuario, $id_filme]);
 
 //FILMES PRA LISTAR CASO JÁ TENHA NA LISTA DE DESEJO
 $sql = "SELECT *
-from lista_desejo, usuario, filme
+from lista_desejo, usuario, filme, sessao, cinema, cidade
 where usuario.id_usuario = lista_desejo.id_usuario
 and lista_desejo.id_filme = filme.id_filme
+and filme.id_filme = sessao.id_filme
+and sessao.id_cinema = cinema.id_cinema
+and cinema.id_cidade = cidade.id_cidade
 and login = '$login_cookie'";
+    
+   
 	
 	$stmt = $conexao->prepare($sql);
 	
-	$stmt->execute();
+    $stmt->execute();
+    
 
-    if($conexao->prepare($sql) != null){
+  
     while($linha=$stmt->fetch()){
-                        
+
+
         $id_filme = $linha["ID_FILME"];
         $titulo = $linha["TITULO"];
+        $cidade = $linha["NOME_CIDADE"];
+        $cinema = $linha["NOME_CINEMA"];
+        $site = $linha["SITE_COMPRA"];
+        $hora = $linha["HORARIO"];
 
-        echo"<p>$titulo</p>";
+        echo"<p><h2>$titulo</p></h2>
+        <p>Sessões de $titulo: </p><p>Cinema: $cinema </p><p>Cidade: $cidade</p><p> Horário: $hora</p><p>Site Ingresso: $site</p>";
 
-}
-    }
-    else
-    {
-        echo"<p>Adicione filmes em Sua Lista de Desejo";
-    }
+       echo"Site pra compra: <a href='$site'>$site</a><br/><br/>";
+
+        }
+        
+
+
+
+    
 ?>
 
 

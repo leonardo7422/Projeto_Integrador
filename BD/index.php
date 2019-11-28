@@ -18,9 +18,7 @@ while($linha=$stmt->fetch()){
 	$acesso = $linha["ACESSO"];
 
 	setcookie("acesso",$acesso);
-
 }
-
 
 if(isset($login_cookie)){
 
@@ -30,7 +28,6 @@ if(isset($login_cookie)){
 	header("Location:login.html");
   }
 
-
 $sql = "SELECT *
 FROM filme";
 
@@ -38,98 +35,57 @@ $stmt = $conexao->prepare($sql);
 	
 	$stmt->execute();
 
-
-
 include("cabecalholayout.php");
 
-
-
-echo"<div id='site'>";
-    
-
-
+	echo"<div id='site'>";
 
 	echo"<b>Bem-Vindo, $nome </b><br>";
- 
 
-
-  
 ?>
-
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>ALFRED</title>
-<style>
-* {
-	margin: 0;
-	padding:0;
-}
-h1{
-	text-align: center;
-}
-body, html {
-	width: 100%;
-	height: 100%;
-	font-family: Arial, Tahoma, sans-serif;
-}
-body {
-	background: url(img/cinema.jpg) center center no-repeat fixed;
-	
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
-#site {
-	width: 560px;
-	padding: 20px;
-	margin: 40px auto;
-	background: #FFF; 
-	background: rgba(255,255,255,0.8);
-p {
-	margin-bottom: 1.5em;
-}</style>
-<script src="js/jquery-ui.min.js"></script>
-<script>
-</script>
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<title>ALFRED</title>
+		<script src="js/jquery-ui.min.js"></script>
+	</head>
 <body>
 	
 <meta charset="UTF-8">
 <title>ALFRED</title>
 <?php
+
 if($acesso == 'adm'){
-include("../classeLayout/classeCabecalhoHTML.php");
-include("cabecalho.php");
+
+	include("../classeLayout/classeCabecalhoHTML.php");
+	include("cabecalho.php");
 }
 ?>
 <br/>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css"/>
+		<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/carousel.1.0.js"></script>
+		<script type="text/javascript">
 
-<link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css"/>
-<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/carousel.1.0.js"></script>
-<script type="text/javascript">
 	$(document).ready(function(){
 		$('.carousel').Carousel();
 	});
+
 </script>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+	<body>
+		<h1><b> Filmes em Cartaz:</b><h1>
+			<br/>
 
+		<form action="lista_filme.php" method="post">
 
-<h1><b> Filmes em Cartaz:</b><h1>
-<br/>
+			<div class='carousel' data-height='80%' data-width='500px' data-effect='size' data-stop_on_hover='true'>
 
-<form action="lista_filme.php" method="post">
-
-
-
-	<div class='carousel' data-height='80%' data-width='500px' data-effect='size' data-stop_on_hover='true'>
-
-	<?php 
+<?php 
 
 $sql = "SELECT  *
 FROM FILME";
@@ -148,12 +104,5 @@ while($linha=$stmt->fetch()){
 }
 
 ?>
-
-
-	
-	
-	
-</div>       
-</div>
 </body>
 </html>

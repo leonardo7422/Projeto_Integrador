@@ -193,42 +193,75 @@ where login = '$login_cookie'";
         $id_usuario = $linha["ID_USUARIO"];
 }
 
-$sql = "INSERT INTO historico (id_usuario, id_filme) VALUES ($id_usuario,$id_filme)";
+$sql = "INSERT INTO lista_desejo (id_usuario, id_filme) VALUES ($id_usuario,$id_filme)";
 
-$conexao->prepare($sql)->execute([$id_filme, $id_usuario]);
+$conexao->prepare($sql)->execute([$id_usuario, $id_filme]);
 
 
         }
 
-        $count = false;
 
 
 //FILMES PRA LISTAR CASO JÁ TENHA NA LISTA DE DESEJO
 $sql = "SELECT *
-from historico, usuario, filme
-where usuario.id_usuario = historico.id_usuario
-and historico.id_filme = filme.id_filme
+from lista_desejo, usuario, filme, sessao, cinema, cidade
+where usuario.id_usuario = lista_desejo.id_usuario
+and lista_desejo.id_filme = filme.id_filme
+and filme.id_filme = sessao.id_filme
+and sessao.id_cinema = cinema.id_cinema
+and cinema.id_cidade = cidade.id_cidade
 and login = '$login_cookie'";
+    
+   
 	
 	$stmt = $conexao->prepare($sql);
 	
-	$stmt->execute();
-
-    while($linha=$stmt->fetch()){
-                        
-        $id_filme = $linha["ID_FILME"];
-        $titulo = $linha["TITULO"];
-
-        echo"<p><h2>$titulo</h2></p>";
-        
-        $count = true;
-
-}
+    $stmt->execute();
     
 
-    if($count == false){
-        echo"<p>Você Não Assistiu Nenhum Filme...";
+  
+    while($linha=$stmt->fetch()){
+
+
+        $id_filme = $linha["ID_FILME"];
+        $titulo = $linha["TITULO"];
+        $cidade = $linha["NOME_CIDADE"];
+        $cinema = $linha["NOME_CINEMA"];
+        $site = $linha["SITE_COMPRA"];
+        $hora = $linha["HORARIO"];
+
+        echo"<p><h2>$titulo</p></h2>";
+
+        $sql = "SELECT CLASSIFICACAO_INDICATIVA, TITULO
+        FROM CLASSIFICACAO, FILME
+        WHERE FILME.ID_CLASSIFICACAO = CLASSIFICACAO.ID_CLASSIFICACAO
+        AND TITULO = '$titulo'";
+        
+        $stmt = $conexao->prepare($sql);
+        
+        $stmt->execute();
+    
+        while($linha=$stmt->fetch()){
+    
+    
+            $classificacao = $linha["CLASSIFICACAO_INDICATIVA"];
+            $titulo = $linha["TITULO"];
+    
         }
+    
+     
+    
+    
+        echo"<p>Sessões de $titulo: </p><p>Cinema: $cinema </p><p>Cidade: $cidade</p><p> Horário: $hora</p><p>Site Ingresso: $site</p>";
+
+       echo"Site pra compra: <a href='$site'>$site</a><br/><br/>";
+
+        }
+        
+
+
+
+    
 ?>
 
 

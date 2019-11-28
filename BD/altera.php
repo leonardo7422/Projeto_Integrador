@@ -1,5 +1,4 @@
 <?php
-
 include("conexao.php");
 
 if(!empty($_POST)){
@@ -7,8 +6,8 @@ if(!empty($_POST)){
 	include("classeControllerBD.php");
 	
 	$c = new ControllerBD($conexao);
-	
-	$c->inserir($_POST,$_GET["tabela"]);
-	echo "1";
+	$c->alterar($_POST,$_GET["tabela"]) or die("0");
+	echo "1";	
 }
+
 ?>

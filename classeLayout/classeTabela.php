@@ -20,7 +20,9 @@
 					foreach($v as $j=>$d){
 						echo "<th>".$j."</th>";
 					}
-					echo "<th>Ação</th>";
+					
+						echo "<th>Ação</th>";
+					
 					echo "</tr>";
 					echo "</thead>";
 					echo "<tbody>";
@@ -30,22 +32,16 @@
 						echo "<td>".$d."</td>";
 					}
 					echo "<td>
-							<form method='post' action='remover.php'  style='float:left;'>
-								<input type='hidden' name='tabela' value='".$this->tabela."' />
-								<input type='hidden' name='id'  value='".$v["ID"]."' />
-								<button>Remover</button>
-							</form>
+							<button value='".$v["ID"]."' class='remover'>Remover</button>
 							
-							<form method='post' action='form_$this->tabela.php'  style='float:right;'>
-								<input type='hidden' name='id'  value='".$v["ID"]."' />
-								<button>Alterar</button>
-							</form>
-							</td>";
+							<button value='".$v["ID"]."' class='alterar'>Alterar</button>
+							
+							</td>";							
 					echo "</tr>";
 			}
 			echo "</tbody>";
 			
-			echo "</table>";
+			echo "</table> <hr /> <div id='botoes'></div>";
 		}
 		
 	}

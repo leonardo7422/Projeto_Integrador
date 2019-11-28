@@ -13,7 +13,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Filmes Não Assistidos<span class="caret"></span></a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Filmes Em Cartaz<span class="caret"></span></a>
         <ul class="dropdown-menu">
         <?php
         
@@ -31,6 +31,8 @@
       </li>
       <li><a href="lista_desejo.php">Lista de Desejos</a></li>
       <li><a href="filmes_assistidos.php">Filmes Já Assistidos</a></li>
+      <li><a href="avaliacao.php">Suas Avaliações</a></li>
+
       <li><a href="logout.php">Logout</a></li>
    
 

@@ -37,7 +37,7 @@ $(document).ready(function(){
 
     var url = $("#cartoonVideo").attr('src');
 
-    $("#cartoonVideo").attr('src', '$titulo');
+    $("#cartoonVideo").attr('src', '');
 
     $("#myModal").on('http://shown.bs.modal', function(){
         $("#cartoonVideo").attr('src', url);

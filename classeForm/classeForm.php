@@ -1,5 +1,5 @@
 <?php
-	require_once("InterfaceExibicao.php");
+	
 	
 	class Form implements Exibicao{
 		private $method;
@@ -37,25 +37,27 @@
 		}
 		
 		public function exibe(){
-			echo "<form ";
-			if($this->method!=null){
-				echo "method='$this->method' ";
+			if(!isset($_SESSION["funcionario"]["permissao"]) || $_SESSION["funcionario"]["permissao"]=="2"){
+				echo "<form ";
+				if($this->method!=null){
+					echo "method='$this->method' ";
+				}
+				if($this->action!=null){
+					echo "action='$this->action' ";
+				}
+				if($this->name!=null){
+					echo "name='$this->name' ";
+				}
+				echo ">";
+				
+				foreach($this->lista_entradas as $i=>$e){
+					echo "<div class='entrada'>";
+					$e->exibe();
+					echo "</div>";
+				}
+				
+				echo "</form>";
 			}
-			if($this->action!=null){
-				echo "action='$this->action' ";
-			}
-			if($this->name!=null){
-				echo "name='$this->name' ";
-			}
-			echo ">";
-			
-			foreach($this->lista_entradas as $i=>$e){
-				echo "<div class='entrada'>";
-				$e->exibe();
-				echo "</div>";
-			}
-			
-			echo "</form>";
 		}
 	}
 

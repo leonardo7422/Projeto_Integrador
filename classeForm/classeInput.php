@@ -1,13 +1,12 @@
 <?php
-	require_once("InterfaceExibicao.php");
+	
 	
 	class Input implements Exibicao{
 		private $type;
 		private $name;
 		private $placeholder;
 		private $value;
-		private $disabled = false;
-		//private $label;
+		private $disabled=false;
 		
 		public function __construct($vetor){
 			$this->type=$vetor["type"];
@@ -19,9 +18,8 @@
 			if(isset($vetor["disabled"])){
 				$this->disabled = $vetor["disabled"];
 			}
-			//$this->label=$vetor["label"];
+			
 		}
-
 		
 		public function exibe(){
 			echo 
@@ -31,7 +29,7 @@
 				echo "placeholder='$this->placeholder' ";
 			}
 			if($this->disabled){
-				echo"disabled ";
+				echo "disabled ";
 			}
 			echo " />";
 		}

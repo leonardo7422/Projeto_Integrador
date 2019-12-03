@@ -1,0 +1,44 @@
+<!doctype <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jquery-3.4.1.min.js"></script>
+    <script>
+            $(document).ready(function(){
+        
+                $("#botao").click(function(){
+           
+                    var seq = $("#sequencia").val();
+                    var sub_seq = $("#sub-sequencia").val();
+
+
+                    
+                if (seq.indexOf(sub_seq) != -1){
+                    
+                 $("#mostrar").text('Tem mais de uma');
+                    
+                 }
+                 else
+                 {
+                 $("#mostrar").text('Não tem nenhuma');
+                 }
+                });
+            });
+        </script>
+</head>
+
+<body>
+        Sequencia:<input type="text" id="sequencia"><br/>
+
+        Sub-Sequência:<input type="text" id="sub-sequencia">
+        <button type="button" id="botao">Analisar</button>
+
+      <p>Resultado: <span id="mostrar">?</span></p>
+
+    
+</body>
+</html>
+

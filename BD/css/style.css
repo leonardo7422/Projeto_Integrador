@@ -24,6 +24,12 @@ body {
 	margin: 40px auto;
 	background: #FFF; 
 	background: rgba(255,255,255,0.8);
+}
 p {
 	margin-bottom: 1.5em;
 }
+
+footer {
+	font-size: 80%;
+	padding: 7px 0px 0px 20px;
+	}

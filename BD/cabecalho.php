@@ -6,13 +6,10 @@
 				"ator"=>"Ator",		
 				"diretor"=>"Diretor",
 				"genero"=>"Gênero",
-				"lista_desejo"=>"Filmes Desejados",
-				"historico"=>"Histórico",
 				"cidade"=>"Cidade",
-				"cinema"=>"Cinema",
-				"sessao"=>"Sessão",
 				"filme"=>"Filme",
-				"usuario"=>"Usuario"
+				"cinema"=>"Cinema",
+				"sessao"=>"Sessão"
 				
 				
 				);

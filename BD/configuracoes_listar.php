@@ -29,6 +29,20 @@ if(isset($_GET["t"])){
 				$t[0][1] = null;
 	}
 
+	if($_GET["t"]=="cidade"){
+		
+		$colunas = array(   "id_cidade as ID","nome_cidade as 'Cidade'");				
+				$t[0][0] = "cidade";
+				$t[0][1] = null;
+	}
+
+	if($_GET["t"]=="lista_desejo"){
+		
+		$colunas = array(   "id_usuario as 'Usuario'","id_filme as 'Filme'");				
+				$t[0][0] = "usuario";
+				$t[0][1] = "filme";
+	}
+
 	
 
 

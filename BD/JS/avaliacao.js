@@ -1,5 +1,5 @@
 
-function Avaliar(estrela) {
+function avaliar(estrela) {
     var url = window.location;
     url = url.toString()
     url = url.split("index.html");

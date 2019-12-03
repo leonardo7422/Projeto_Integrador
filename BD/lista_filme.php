@@ -97,8 +97,9 @@ LIMIT 1";
 
 		echo"<a href='lista_desejo.php?filme=$titulo'>Adicionar $titulo em Sua Lista de Desejo</a><br/>";
 
-		echo"<a href='filmes_assistidos.php?filme=$titulo'>Já assistiu $titulo?</a><br/><br/>";
+		echo"<a href='filmes_assistidos.php?filme=$titulo'>Já assistiu $titulo?</a><br/>";
 
+		
 		echo "	</div>";
 
 
@@ -108,25 +109,38 @@ echo"<!DOCTYPE html>
 <meta charset='UTF-8'/>
 <title>$titulo</title>";
 
+
 ?>
+<footer>
+	&reg; 2019, ALFRED<br/>
+		O cinema não é senão o aspecto mais evolutivo do realismo plástico que começa com o Renascimento. (André Malraux)
+	</footer>
 <script>
  $(document).ready(function(){
 
+<?php echo "var id_filme = $id_filme;"; ?>
 
 $("#s1, #s2, #s3, #s4, #s5").click(function(){
-
+	valor = $(this).attr("value");
    $.ajax({
 	url: 'avaliacao.php',
 	type: 'POST',
-	data: {nota: $("#rating").html()
+	data: {nota: valor,
+		filme: id_filme
 	},
-	success: function(callback){
-	   alert(callback);
+	success: function(d){
+		avaliar(valor);
+		alert(d);
+		
+	  
 	}
    });
 });
 });
 
+
+
 </script>
+
 
 

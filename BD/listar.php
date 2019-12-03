@@ -2,9 +2,12 @@
 	require_once("../classeLayout/classeCabecalhoHTML.php");
 	require_once("cabecalho.php");
 	require_once("../classeLayout/classeTabela.php");
+	require_once("classeControllerBD.php");
+
+
+
 	
 	require_once("conexao.php");
-	require_once("classeControllerBD.php");
 	
 	require_once("configuracoes_listar.php");
 	
@@ -19,6 +22,13 @@
 	}
 	if($_GET["t"]=="genero"){
 		require_once("form_genero.php");
+	}
+	if($_GET["t"]=="cidade"){
+		require_once("form_cidade.php");
+	}
+
+	if($_GET["t"]=="lista_desejo"){
+		require_once("form_lista_desejo.php");
 	}
 	
 	$c = new ControllerBD($conexao);

@@ -109,6 +109,11 @@ and login = '$login_cookie'";
             }
             
 ?>
+</div>
+<footer>
+	&reg; 2019, ALFRED<br/>
+		O cinema não é senão o aspecto mais evolutivo do realismo plástico que começa com o Renascimento. (André Malraux)
+	</footer>
 
 
 

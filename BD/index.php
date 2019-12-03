@@ -47,6 +47,7 @@ include("cabecalholayout.php");
 	<head>
 		<meta charset="UTF-8" />
 		<title>ALFRED</title>
+		<link rel="shortcut icon" href="favicon.ico" >
 		<script src="js/jquery-ui.min.js"></script>
 	</head>
 <body>
@@ -87,7 +88,7 @@ if($acesso == 'adm'){
 
 <?php 
 
-$sql = "SELECT  *
+$sql = "SELECT *
 FROM FILME";
 
 $stmt = $conexao->prepare($sql);
@@ -100,9 +101,15 @@ while($linha=$stmt->fetch()){
 	$titulo = $linha["TITULO"];
 
 	echo"<a href='lista_filme.php?var=$titulo' style='border-bottom: none;'><img src='img/$titulo.jpg' alt='Coringa'/></a>";
-
 }
 
 ?>
+
+</div>
+</div>
 </body>
 </html>
+<footer>
+	&reg; 2019, ALFRED<br/>
+		O cinema não é senão o aspecto mais evolutivo do realismo plástico que começa com o Renascimento. (André Malraux)
+	</footer>

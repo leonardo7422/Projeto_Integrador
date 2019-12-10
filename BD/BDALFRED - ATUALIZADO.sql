@@ -36,9 +36,10 @@ CREATE TABLE IF NOT EXISTS DIRETOR (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS ATORES_FILME (
+	ID_ATORES_FILME INT NOT NULL,
     ID_FILME INT NOT NULL,
     ID_ATOR INT NOT NULL,
-    PRIMARY KEY(ID_FILME, ID_ATOR),
+    PRIMARY KEY(ID_ATORES_FILME, ID_FILME, ID_ATOR),
     FOREIGN KEY (ID_FILME)
         REFERENCES FILME(ID_FILME)
         ON UPDATE CASCADE ON DELETE CASCADE,
@@ -81,9 +82,10 @@ CREATE TABLE IF NOT EXISTS GENERO (
 
 
 CREATE TABLE IF NOT EXISTS GENERO_FILME (
+	ID_GENERO_FILME INT NOT NULL,
     ID_FILME INT NOT NULL,
     ID_GENERO INT NOT NULL,
-    PRIMARY KEY (ID_FILME , ID_GENERO),
+    PRIMARY KEY (ID_GENERO_FILME, ID_FILME , ID_GENERO),
     FOREIGN KEY (ID_FILME)
         REFERENCES FILME (ID_FILME)
         ON UPDATE CASCADE ON DELETE CASCADE,
@@ -188,14 +190,14 @@ CREATE TABLE IF NOT EXISTS SESSAO (
         A embarcação deles naufraga, e o jovem sobrevive junto com alguns animais, incluindo um temível tigre de Bengala, com o qual desenvolve uma ligação.', 'Duração: 130 min', '2010-5-10', '2013-7-20');
     
     
-			insert into genero_filme values (1, 1000);
-			insert into genero_filme values (2, 5000);
-			insert into genero_filme values (3, 4000);
+			insert into genero_filme values (1,1, 1000);
+			insert into genero_filme values (2,2, 5000);
+			insert into genero_filme values (3,3, 4000);
         
-			insert into atores_filme values (1, 1);
-			insert into atores_filme values (1, 2);
-			insert into atores_filme values (2, 3);
-			insert into atores_filme values (3, 4);
+			insert into atores_filme values (1,1, 1);
+			insert into atores_filme values (2,1, 2);
+			insert into atores_filme values (3,2, 3);
+			insert into atores_filme values (4,3, 4);
             
 			insert into cidade values (26, 'Araraquara');
 			insert into cidade values (27, 'São Carlos');
@@ -231,7 +233,7 @@ select * from
 historico, filme
 where filme.id_filme = historico.id_filme;
 
-
+-- TRIGGER PRA REMOVER DO LISTA DESEJO
 DROP TRIGGER IF EXISTS TRIGGER_DELETE_FILME_LISTA_DESEJO;
 ​
 DELIMITER //
@@ -241,7 +243,38 @@ BEGIN
 end; //
 DELIMITER ;
 
+
+
+-- TRIGGER PRA REMOVER DOS FILMES ASSISTIDOS
+DROP TRIGGER IF EXISTS TRIGGER_DELETE_FILME_HISTORICO;
+​
+DELIMITER //
+CREATE TRIGGER TRIGGER_DELETE_FILME_HISTORICO BEFORE INSERT ON LISTA_DESEJO FOR EACH ROW
+BEGIN 
+	DELETE FROM HISTORICO  WHERE ID_FILME = NEW.ID_FILME AND ID_USUARIO = NEW.ID_USUARIO ;    
+end; //
+DELIMITER ;
+
 SELECT * FROM LISTA_DESEJO;
 
 
 SELECT * FROM HISTORICO;
+
+SELECT *
+from historico, usuario, filme, classificacao
+where usuario.id_usuario = historico.id_usuario
+and historico.id_filme = filme.id_filme
+and classificacao.id_classificacao = filme.id_classificacao
+and titulo = 'coringa'
+and login = 'leo';
+
+
+SELECT *
+from lista_desejo, usuario, filme, sessao, cinema, cidade, classificacao
+where usuario.id_usuario = lista_desejo.id_usuario
+and lista_desejo.id_filme = filme.id_filme
+and filme.id_filme = sessao.id_filme
+and sessao.id_cinema = cinema.id_cinema
+and cinema.id_cidade = cidade.id_cidade
+and classificacao.id_classificacao = filme.id_classificacao
+and usuario.id_usuario = 2;

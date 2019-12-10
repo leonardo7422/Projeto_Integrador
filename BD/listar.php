@@ -27,17 +27,40 @@
 		require_once("form_cidade.php");
 	}
 
-	if($_GET["t"]=="lista_desejo"){
-		require_once("form_lista_desejo.php");
+	if($_GET["t"]=="filme"){
+		require_once("form_filme.php");
+	}
+	
+	if($_GET["t"]=="cinema"){
+		require_once("form_cinema.php");
+	}
+	
+	if($_GET["t"]=="sessao"){
+		require_once("form_sessao.php");
+	}
+	
+	
+	if($_GET["t"]=="genero_filme"){
+		require_once("form_genero_filme.php");
+	}
+	
+	
+	if($_GET["t"]=="atores_filme"){
+		require_once("form_atores_filme.php");
 	}
 	
 	$c = new ControllerBD($conexao);
 	
 	$r = $c->selecionar($colunas,$t,null,null," LIMIT 0,5");
 	
+
+	$matriz = null;
+
 	while($linha = $r->fetch(PDO::FETCH_ASSOC)){
 		$matriz[] = $linha;
 	}
+
+	
 	
 	$t = new Tabela($matriz,$t[0][0]);
 	$t->exibe();

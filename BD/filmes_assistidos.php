@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'/>
+<title>Filmes Assistidos</title>
+
 <link rel="stylesheet" type="text/css" href="css/style_filme.css">
 
 <?php
@@ -12,13 +18,6 @@ if(isset($login_cookie)){
 }
 
 include("conexao.php");
-
-$sql = "SELECT *
-FROM filme";
-
-$stmt = $conexao->prepare($sql);
-	
-$stmt->execute();
 
 include("cabecalholayout.php");
 
@@ -96,12 +95,10 @@ and login = '$login_cookie'";
     if($count == false){
         echo"<p>Você Não Assistiu Nenhum Filme...";
         }
-?>
-</div>
-<footer>
-	&reg; 2019, ALFRED<br/>
-		O cinema não é senão o aspecto mais evolutivo do realismo plástico que começa com o Renascimento. (André Malraux)
-	</footer>
+
+     include("footer.html");
+
+     ?>
 
 
 

@@ -33,7 +33,7 @@
             img_width: '100%', // Tamanho das imagens Altura, padrão 100%
             arrow_left: "<i class='fa-2x fa fa-chevron-left'></i>",//Seta para esquerda, por padrão font awesome
             arrow_right: "<i class='fa-2x fa fa-chevron-right'></i>",//Seta para direita, por padrão font awesome
-            activeColor: "#00BFFF", //Cor do li ativos, por padrão um tom de azul
+            activeColor: "#FFFFFF", //Cor do li ativos, por padrão um tom de azul
             btn_pause: "<i class='fa fa-pause'></i>", // Imagem botao pause, por padrão font awesome
             btn_play: "<i class='fa fa-play'></i>", // Imagem botao de play(continuar), por padrão font awesome
             has_selector: true, //Componente para veificar se pode existir os seletores individuais de slides, padrão true
@@ -46,7 +46,7 @@
             menu: {}, //position dos seletor de slides, por padrão a esquerda e em baixo, usando um json como parametro
             icones_selector: "<i class='fa fa-circle'></i>", //icones dos seletores, por padrão fontAwesome
             liClass: "", //Classe para seletores li, por padrão sem classe
-            color: "a51b0b" //Cor da fonte, usando para fontAwesome, padrão petro #000
+            color: "#a51b0b" //Cor da fonte, usando para fontAwesome, padrão petro #000
         };
         
         //Mesclando os parametros passados por atributes hmlt5  ou por js, dando prioridade para o atributes

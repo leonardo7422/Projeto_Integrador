@@ -2,6 +2,8 @@
 
 <?php
 
+session_start();
+
 $login_cookie = $_COOKIE['login'];
 
 if(isset($login_cookie)){ 
@@ -11,18 +13,9 @@ else
   header("Location:login.html");
 }
 
-session_start();
-
 $filme = $_GET["var"];
 
 include("conexao.php");
-
-$sql = "SELECT *
-FROM filme";
-
-$stmt = $conexao->prepare($sql);
-	
-$stmt->execute();
 
 include("cabecalholayout.php");
 
@@ -99,8 +92,7 @@ LIMIT 1";
 
 		echo"<a href='filmes_assistidos.php?filme=$titulo'>Já assistiu $titulo?</a><br/>";
 
-		
-		echo "	</div>";
+		echo "</div>";
 
 
 echo"<!DOCTYPE html>
@@ -109,12 +101,9 @@ echo"<!DOCTYPE html>
 <meta charset='UTF-8'/>
 <title>$titulo</title>";
 
+include("footer.html");
 
 ?>
-<footer>
-	&reg; 2019, ALFRED<br/>
-		O cinema não é senão o aspecto mais evolutivo do realismo plástico que começa com o Renascimento. (André Malraux)
-	</footer>
 <script>
  $(document).ready(function(){
 

@@ -16,6 +16,13 @@
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Filmes Em Cartaz<span class="caret"></span></a>
         <ul class="dropdown-menu">
         <?php
+
+$sql = "SELECT *
+FROM filme";
+
+$stmt = $conexao->prepare($sql);
+	
+$stmt->execute();
         
         while($linha=$stmt->fetch()){
 	
@@ -31,7 +38,7 @@
       </li>
       <li><a href="lista_desejo.php">Lista de Desejos</a></li>
       <li><a href="filmes_assistidos.php">Filmes Já Assistidos</a></li>
-      <li><a href="avaliacao.php">Suas Avaliações</a></li>
+      <li><a href="lista_avaliacao.php">Suas Avaliações</a></li>
 
       <li><a href="logout.php">Logout</a></li>
    

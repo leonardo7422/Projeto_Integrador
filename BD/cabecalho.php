@@ -9,8 +9,9 @@
 				"cidade"=>"Cidade",
 				"filme"=>"Filme",
 				"cinema"=>"Cinema",
-				"sessao"=>"Sessão"
-				
+				"sessao"=>"Sessão",
+				"genero_filme"=>"Genero Filme",
+				"atores_filme"=>"Atores Filme"				
 				
 				);
 				

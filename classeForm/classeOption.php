@@ -1,5 +1,4 @@
 <?php
-require_once("interfaceExibicao.php");
 
 class Option implements Exibicao{
 	private $value;

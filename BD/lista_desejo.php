@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'/>
+<title>Filmes Desejados</title>
+
 <link rel="stylesheet" type="text/css" href="css/style_filme.css">
 
 <?php
@@ -14,12 +20,22 @@ if(isset($login_cookie)){
 
 include("conexao.php");
 
+//Pegar usuário comparando o login
 $sql = "SELECT *
-FROM filme";
-
-$stmt = $conexao->prepare($sql);
+from usuario
+where login = '$login_cookie'";
 	
-$stmt->execute();
+	$stmt = $conexao->prepare($sql);
+	
+	$stmt->execute();
+
+	while($linha=$stmt->fetch()){
+                        
+        $id_usuario = $linha["ID_USUARIO"];
+}
+
+
+
 
 include("cabecalholayout.php");
 
@@ -30,9 +46,8 @@ include("../classeLayout/classeCabecalhoHTML.php");
 
 if(!empty($_GET['filme'])) 
 {
-$_SESSION['filme']= $_GET['filme'];
-
-$filme = $_SESSION["filme"];
+ 
+$filme = $_GET['filme'];
 
 $sql = "SELECT *
 from filme
@@ -47,23 +62,11 @@ where titulo = '$filme'";
         $id_filme = $linha["ID_FILME"];
     } 		
 
-    $sql = "SELECT *
-from usuario
-where login = '$login_cookie'";
-	
-	$stmt = $conexao->prepare($sql);
-	
-	$stmt->execute();
-
-	while($linha=$stmt->fetch()){
-                        
-        $id_usuario = $linha["ID_USUARIO"];
-}
-
 $sql = "INSERT INTO lista_desejo (id_usuario, id_filme) VALUES ($id_usuario,$id_filme)";
 
 $conexao->prepare($sql)->execute([$id_usuario, $id_filme]);
         }
+
 
         $count = false;
 
@@ -76,7 +79,7 @@ and filme.id_filme = sessao.id_filme
 and sessao.id_cinema = cinema.id_cinema
 and cinema.id_cidade = cidade.id_cidade
 and classificacao.id_classificacao = filme.id_classificacao
-and login = '$login_cookie'";
+and usuario.id_usuario = $id_usuario";
     
 	$stmt = $conexao->prepare($sql);
 	
@@ -97,23 +100,21 @@ and login = '$login_cookie'";
        
         echo" <span class='classificacao c-$classificacao'>$classificacao</span></p></h2>";
        
-        echo"<p>Sessões $id_sessao de $titulo: </p><p>Cinema: $cinema </p><p>Cidade: $cidade</p><p> Horário: $hora</p><p>Site Ingresso: $site</p>";
+        echo"<p>Sessão $id_sessao de $titulo: </p><p>Cinema: $cinema </p><p>Cidade: $cidade</p><p> Horário: $hora</p>";
         
-        echo"Site pra compra: <a href='$site'>$site</a><br/><br/>";
+        echo"Site pra compra do ingresso: <a href='$site'>$site</a><br/><br/>";
         
         $count = true;
         }
 
             if($count == false){
-                echo"<p>Não Existe Filme na Sua Lista de Desejo";
+                echo"<p>Não Existe Filme na Sua Lista de Desejo...";
             }
             
-?>
-</div>
-<footer>
-	&reg; 2019, ALFRED<br/>
-		O cinema não é senão o aspecto mais evolutivo do realismo plástico que começa com o Renascimento. (André Malraux)
-	</footer>
+            include("footer.html");
+            
+        ?>
+
 
 
 

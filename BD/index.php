@@ -2,6 +2,10 @@
 
 include("conexao.php");
 
+include("cabecalholayout.php");
+
+	echo"<div id='site'>";
+
 
 $login_cookie = $_COOKIE['login'];
 
@@ -22,24 +26,12 @@ while($linha=$stmt->fetch()){
 
 if(isset($login_cookie)){
 
-  }else{
-	echo"Bem-Vindo, $nome <br>";
-	echo"<p>Essas informações <font color='red'>NÃO PODEM</font> ser acessadas por você</p>";
+	echo"<b>Bem-Vindo, $nome!</b><br><br>";
+  }
+  else
+  {
 	header("Location:login.html");
   }
-
-$sql = "SELECT *
-FROM filme";
-
-$stmt = $conexao->prepare($sql);
-	
-	$stmt->execute();
-
-include("cabecalholayout.php");
-
-	echo"<div id='site'>";
-
-	echo"<b>Bem-Vindo, $nome </b><br>";
 
 ?>
 <!DOCTYPE html>
@@ -103,13 +95,6 @@ while($linha=$stmt->fetch()){
 	echo"<a href='lista_filme.php?var=$titulo' style='border-bottom: none;'><img src='img/$titulo.jpg' alt='Coringa'/></a>";
 }
 
-?>
+include("footer.html");
 
-</div>
-</div>
-</body>
-</html>
-<footer>
-	&reg; 2019, ALFRED<br/>
-		O cinema não é senão o aspecto mais evolutivo do realismo plástico que começa com o Renascimento. (André Malraux)
-	</footer>
+?>

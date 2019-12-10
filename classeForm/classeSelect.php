@@ -1,6 +1,5 @@
 <?php
 
-require_once("interfaceExibicao.php");
 
 class Select implements Exibicao{
 	private $name;

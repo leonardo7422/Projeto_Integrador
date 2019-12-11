@@ -68,6 +68,8 @@ else{
 	$f->add_button($v);	
 ?>
 <h3>Formulário - Inserir Cidade</h3>
+<div id="status"></div>
+
 <hr />
 <?php
 	$f->exibe();

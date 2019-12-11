@@ -89,6 +89,8 @@ else{
 	$f->add_button($v);	
 ?>
 <h3>Formulário - Inserir SESSAO</h3>
+<div id="status"></div>
+
 <hr />
 <?php
 	$f->exibe();

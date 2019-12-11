@@ -80,8 +80,15 @@ if($acesso == 'adm'){
 
 <?php 
 
-$sql = "SELECT *
-FROM FILME";
+			$sql = "SELECT DISTINCT
+						CURRENT_TIMESTAMP(),
+						TITULO,
+						DATA_ESTREIA,
+						DATA_RETIRADA
+					FROM
+						FILME
+					WHERE
+						CURRENT_TIMESTAMP() BETWEEN DATA_ESTREIA AND DATA_RETIRADA";
 
 $stmt = $conexao->prepare($sql);
 
@@ -94,7 +101,8 @@ while($linha=$stmt->fetch()){
 
 	echo"<a href='lista_filme.php?var=$titulo' style='border-bottom: none;'><img src='img/$titulo.jpg' alt='Coringa'/></a>";
 }
+	
 
+echo"</div>";
 include("footer.html");
-
 ?>

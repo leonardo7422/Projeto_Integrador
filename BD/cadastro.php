@@ -1,6 +1,5 @@
 <?php 
 
-$cep = $_POST['cep'];
 $email = $_POST['email'];
 $nome = $_POST['nome'];
 $login = $_POST['login'];
@@ -29,7 +28,7 @@ $logarray = $array['login'];
         die();
  
       }else{
-        $query = "INSERT INTO usuario (cep,acesso,email,nome,login,senha) VALUES ('$cep', '$acesso', '$email', '$nome', '$login', '$senha')";
+        $query = "INSERT INTO usuario (acesso,email,nome,login,senha) VALUES ('$acesso', '$email', '$nome', '$login', '$senha')";
         $insert = mysql_query($query,$connect);
          
         if($insert){

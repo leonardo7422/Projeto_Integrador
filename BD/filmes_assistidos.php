@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='UTF-8'/>
-<title>Filmes Assistidos</title>
-
 <link rel="stylesheet" type="text/css" href="css/style_filme.css">
 
 <?php
 
+//recebimento do login e verificação
 $login_cookie = $_COOKIE['login'];
 
-if(isset($login_cookie)){
-    
-}else{
-
+if(isset($login_cookie)){   
+}
+else
+{
   header("Location:login.html");
 }
+//---------------------------
 
 include("conexao.php");
 
@@ -26,12 +22,13 @@ echo"<div id='site'";
 include("../classeLayout/classeCabecalhoHTML.php");
 
 
+//Verificação de recebimento por get e inserir, caso não haja dados no get, será exibido somente os dados já existentes no banco
 if(!empty($_GET['filme'])) 
 {
-$_SESSION['filme']= $_GET['filme'];
 
-$filme = $_SESSION["filme"];
+$filme = $_GET['filme'];
 
+//Select para indicar a classificação de cada filme
 $sql = "SELECT *
 from filme, classificacao
 where classificacao.id_classificacao = filme.id_classificacao
@@ -45,7 +42,9 @@ and titulo = '$filme'";
                         
         $id_filme = $linha["ID_FILME"];    
     } 		
+    //-------------------------
 
+    //Select pra pegar o id do usuario a partir do login cookie
     $sql = "SELECT *
     from usuario
     where login = '$login_cookie'";
@@ -58,14 +57,18 @@ and titulo = '$filme'";
                         
      $id_usuario = $linha["ID_USUARIO"];
 }
+//--------------------------
 
+//Insert com os dados já recebidos anteriormente
 $sql = "INSERT INTO historico (id_usuario, id_filme) VALUES ($id_usuario,$id_filme)";
 
     $conexao->prepare($sql)->execute([$id_filme, $id_usuario]);
 
     }
-
-        $count = false;
+    //-------------------------------------------------------------------
+    
+        //condição pra caso não haja filme nenhum inserido no historico
+        $verif = false;
 
 //FILMES PRA LISTAR CASO JÁ TENHA NA LISTA DE DESEJO
 $sql = "SELECT *
@@ -89,16 +92,23 @@ and login = '$login_cookie'";
         echo"<p><h2>$titulo";
         echo" <span class='classificacao c-$classificacao'>$classificacao</span></p></h2>";
      
-        $count = true;
+        $verif = true;
 }
     
-    if($count == false){
+    //verificação pra informar o usuário que ele não adicionou nenhum filme no historico
+    if($verif == false){
         echo"<p>Você Não Assistiu Nenhum Filme...";
         }
 
      include("footer.html");
 
      ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'/>
+<title>Filmes Assistidos</title>
 
 
 

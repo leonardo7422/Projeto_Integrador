@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='UTF-8'/>
-<title>Filmes Desejados</title>
-
 <link rel="stylesheet" type="text/css" href="css/style_filme.css">
 
 <?php
 
+//Verificar se o usuário está logado
 $login_cookie = $_COOKIE['login'];
 
-
 if(isset($login_cookie)){
-    
-}else{
-
+}
+else
+{
   header("Location:login.html");
 }
+//--------------------------
 
 include("conexao.php");
 
@@ -43,7 +38,7 @@ echo"<div id='site'";
 
 include("../classeLayout/classeCabecalhoHTML.php");
 
-
+//Verificação de recebimento por get e inserir, caso não haja dados no get, será exibido somente os dados já existentes no banco
 if(!empty($_GET['filme'])) 
 {
  
@@ -66,9 +61,10 @@ $sql = "INSERT INTO lista_desejo (id_usuario, id_filme) VALUES ($id_usuario,$id_
 
 $conexao->prepare($sql)->execute([$id_usuario, $id_filme]);
         }
+//---------------------------------------------------------------------------
 
-
-        $count = false;
+//condição para caso o usuario não tenha adicionado na lista de desejo ainda
+        $verif = false;
 
 //FILMES PRA LISTAR CASO JÁ TENHA NA LISTA DE DESEJO
 $sql = "SELECT *
@@ -104,16 +100,23 @@ and usuario.id_usuario = $id_usuario";
         
         echo"Site pra compra do ingresso: <a href='$site'>$site</a><br/><br/>";
         
-        $count = true;
+        $verif = true;
         }
 
-            if($count == false){
+//Verificação para informar o usuario que ele não adicionou na lista de desejo ainda
+            if($verif == false){
                 echo"<p>Não Existe Filme na Sua Lista de Desejo...";
             }
             
             include("footer.html");
             
         ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'/>
+<title>Filmes Desejados</title>
 
 
 

@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='UTF-8'/>
-<title>Avaliações</title>
-
 <link rel="stylesheet" type="text/css" href="css/style_filme.css">
 
 <?php
 
+//Verificar se o usuário está logado
 $login_cookie = $_COOKIE['login'];
 
-
-if(isset($login_cookie)){
-    
-}else{
-
+if(isset($login_cookie)){    
+}
+else
+{
   header("Location:login.html");
 }
+//-----------------------
 
 include("conexao.php");
 
@@ -41,8 +36,10 @@ echo"<div id='site'";
 
 include("../classeLayout/classeCabecalhoHTML.php");
 
-$count = false;
+//condição para caso o usuario não tenha avaliado ainda
+$verif = false;
 
+//Select para receber todas as avaliações do respectivo usuário
 $sql = "SELECT *
 from avaliacao, filme, classificacao
 where filme.id_filme = avaliacao.id_filme
@@ -66,13 +63,22 @@ $stmt = $conexao->prepare($sql);
 
     echo"<p>Número de estrelas dadas pro filme: $nota</p>";
 
-    $count = true;
-
-
+    $verif = true;
     }
 
-    if($count == false){
+    //---------------------------------------
+
+//Verificação para informar o usuario que ele não avaliou ainda
+    if($verif == false){
       echo"<p>Você Não Avaliou Nenhum Filme...";
       }
 
      include("footer.html");
+
+     ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'/>
+<title>Avaliações</title>

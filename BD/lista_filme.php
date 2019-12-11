@@ -2,8 +2,7 @@
 
 <?php
 
-session_start();
-
+//recebimento do login e verificação
 $login_cookie = $_COOKIE['login'];
 
 if(isset($login_cookie)){ 
@@ -12,7 +11,9 @@ else
 {
   header("Location:login.html");
 }
+//---------------------------
 
+//get recebido do index
 $filme = $_GET["var"];
 
 include("conexao.php");
@@ -21,14 +22,8 @@ include("cabecalholayout.php");
 
 echo"<div id='site'";
 
-$acesso = $_COOKIE['acesso'];
 
-if($acesso == 'adm'){
-	include("../classeLayout/classeCabecalhoHTML.php");
-	include("cabecalho.php");
-	echo"</div>";
-	}
-
+//select pra receber dados do filme comparando o valor recebido pelo get
 	$sql = "SELECT *
 FROM
     filme
@@ -64,6 +59,7 @@ LIMIT 1";
 		$classificacao = $linha["CLASSIFICACAO_INDICATIVA"];
 
 }
+		//exibição dos dados específicos pro usuário do filme selecionado
 		echo"<div id='site'";
 
 		echo"<span class='fonte'><span class='vermelho'>".$titulo."</span>";
@@ -93,8 +89,10 @@ LIMIT 1";
 		echo"<a href='filmes_assistidos.php?filme=$titulo'>Já assistiu $titulo?</a><br/>";
 
 		echo "</div>";
+		//--------------------------------
 
 
+		//estrutura html básica com title intulado pelo nome do filme
 echo"<!DOCTYPE html>
 <html>
 <head>
@@ -103,6 +101,7 @@ echo"<!DOCTYPE html>
 
 include("footer.html");
 
+//AJAX para enviar a nota da avaliação feito pelas estrelas e o id do filme avaliado para a avaliacao.php
 ?>
 <script>
  $(document).ready(function(){

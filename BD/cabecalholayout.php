@@ -1,5 +1,5 @@
 
-
+<!--NAVBAR das páginas -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=5">
   <link rel="stylesheet" href="bootstrap/3.4.0/css/bootstrap.min.css">
@@ -17,6 +17,7 @@
         <ul class="dropdown-menu">
         <?php
 
+//Select para criar uma linha para cada filme existente no banco
 $sql = "SELECT *
 FROM filme";
 
@@ -31,9 +32,12 @@ $stmt->execute();
         echo"
         <li><a href='lista_filme.php?var=$titulo'>$titulo</a></li>";
 }
+//-------------------------------------------
 
 
    ?>
+
+<!--Outras linhas redirecionando para as outras páginas -->
         </ul>
       </li>
       <li><a href="lista_desejo.php">Lista de Desejos</a></li>

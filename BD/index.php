@@ -2,14 +2,16 @@
 
 include("conexao.php");
 
+//navbar e select dentro do include
 include("cabecalholayout.php");
 
 	echo"<div id='site'>";
 
-
+//cookie do login enviado pela pagina login.php
 $login_cookie = $_COOKIE['login'];
 
 
+//select para receber o nome do usuário e a permissão comparando o login
 $sql = "SELECT * FROM USUARIO WHERE login = '$login_cookie'";
 	
 $stmt = $conexao->prepare($sql);
@@ -21,9 +23,9 @@ while($linha=$stmt->fetch()){
 	$nome = $linha["NOME"];
 	$acesso = $linha["ACESSO"];
 
-	setcookie("acesso",$acesso);
 }
 
+//verificar se o usuário está logado
 if(isset($login_cookie)){
 
 	echo"<b>Bem-Vindo, $nome!</b><br><br>";
@@ -32,6 +34,7 @@ if(isset($login_cookie)){
   {
 	header("Location:login.html");
   }
+  //-----------------------
 
 ?>
 <!DOCTYPE html>
@@ -48,11 +51,14 @@ if(isset($login_cookie)){
 <title>ALFRED</title>
 <?php
 
+//Permissão de usuário pra mostrar os formulários
 if($acesso == 'adm'){
 
 	include("../classeLayout/classeCabecalhoHTML.php");
 	include("cabecalho.php");
 }
+//----------------------------
+
 ?>
 <br/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -74,12 +80,11 @@ if($acesso == 'adm'){
 		<h1><b> Filmes em Cartaz:</b><h1>
 			<br/>
 
-		<form action="lista_filme.php" method="post">
-
+			<!-- Criação das divs para o carrossel -->
 			<div class='carousel' data-height='80%' data-width='500px' data-effect='size' data-stop_on_hover='true'>
 
 <?php 
-
+			//Select para receber os filmes respectivos dentro do banco de dados
 			$sql = "SELECT DISTINCT
 						CURRENT_TIMESTAMP(),
 						TITULO,
@@ -99,10 +104,12 @@ while($linha=$stmt->fetch()){
 
 	$titulo = $linha["TITULO"];
 
+	//Criação das tags <a dentro da div do carrossel, até existir filmes dentro do banco, com get pro lista_filme.php
 	echo"<a href='lista_filme.php?var=$titulo' style='border-bottom: none;'><img src='img/$titulo.jpg' alt='Coringa'/></a>";
 }
 	
-
+//fechamento da div #site
 echo"</div>";
+
 include("footer.html");
 ?>
